@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>SiteCare Pricing + Add-ons (Modular Demo)</title>
+    <title>SiteCare Pricing + Add-ons</title>
     <style>
         :root {
             --bg: #0b1220;
@@ -489,7 +489,7 @@
         <div class="wrap">
             <div class="title">
                 <div>
-                    <h1>SiteCare: Plans + Modular Add-ons (Demo)</h1>
+                    <h1>SiteCare: Plans + Modular Add-ons</h1>
                     <div class="sub">
                         Select a plan, then add modules. The total updates instantly and shows a clear breakdown.
                     </div>
@@ -522,7 +522,8 @@
                 <section class="card">
                     <div class="hd">
                         <h2>2) Add modules</h2>
-                        <div class="muted" style="font-size:12px">Each module shows price and "Read more"</div>
+                        <div class="muted" style="font-size:12px">Select any modules you need. Each shows the monthly
+                            price and includes detailed information.</div>
                     </div>
                     <div class="bd">
                         <div class="modules" id="modules"></div>
@@ -560,9 +561,9 @@
                         selections</button>
 
                     <div class="note" id="noteBox">
-                        Tip: This page acts are pricing calculator for SiteCare. Add only what you need. It Can be
-                        converted to PDF
-                        invoice Later.
+                        Build your custom SiteCare plan by selecting a base plan and adding only the modules you need.
+                        Your total updates automatically. Once you're ready, you can proceed to checkout or download a
+                        detailed quote.
                     </div>
                 </div>
             </aside>
@@ -1032,7 +1033,7 @@
                 await navigator.clipboard.writeText(text);
                 $("#noteBox").textContent = "Copied summary to clipboard.";
                 setTimeout(() => {
-                    $("#noteBox").textContent = "Tip: Use this demo in meetings to show \"stay on any plan + add only what you need\". You can later connect this to a quote form or PDF generator.";
+                    $("#noteBox").textContent = "Build your custom SiteCare plan by selecting a base plan and adding only the modules you need. Your total updates automatically. Once you're ready, you can proceed to checkout or download a detailed quote.";
                 }, 1800);
             } catch (err) {
                 // Fallback
