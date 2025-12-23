@@ -1,0 +1,1048 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>SiteCare Pricing + Add-ons (Modular Demo)</title>
+    <style>
+        :root {
+            --bg: #0b1220;
+            --panel: #111a2e;
+            --panel2: #0f172a;
+            --text: #e8eefc;
+            --muted: #a9b7d6;
+            --line: rgba(255, 255, 255, .10);
+            --accent: #6ee7ff;
+            --accent2: #a78bfa;
+            --good: #86efac;
+            --warn: #fbbf24;
+            --danger: #fb7185;
+            --shadow: 0 10px 30px rgba(0, 0, 0, .35);
+            --radius: 16px;
+            --radius2: 12px;
+            --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--sans);
+            background: radial-gradient(1200px 600px at 20% 10%, rgba(110, 231, 255, .10), transparent 60%),
+                radial-gradient(900px 500px at 80% 20%, rgba(167, 139, 250, .10), transparent 60%),
+                var(--bg);
+            color: var(--text);
+        }
+
+        header {
+            padding: 22px 18px;
+            border-bottom: 1px solid var(--line);
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(10px);
+            background: rgba(11, 18, 32, .70);
+            z-index: 10;
+        }
+
+        .wrap {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 18px;
+        }
+
+        .title {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            justify-content: space-between;
+            flex-wrap: wrap
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 18px;
+            letter-spacing: .2px;
+            font-weight: 700;
+        }
+
+        .sub {
+            margin-top: 6px;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .pill {
+            padding: 8px 10px;
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .04);
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .btn {
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, .06);
+            color: var(--text);
+            padding: 9px 12px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .btn:hover {
+            border-color: rgba(110, 231, 255, .45)
+        }
+
+        main {
+            padding: 18px
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 14px;
+            align-items: start;
+        }
+
+        @media (max-width: 980px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 80px;
+            align-self: start;
+        }
+
+        .card {
+            background: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .03));
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .card h2 {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: .2px;
+        }
+
+        .card .hd {
+            padding: 14px 14px 10px;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .card .bd {
+            padding: 14px
+        }
+
+        .plans {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        @media (max-width: 980px) {
+            .plans {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        @media (max-width: 560px) {
+            .plans {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .plan {
+            border: 1px solid var(--line);
+            background: rgba(15, 23, 42, .55);
+            border-radius: var(--radius2);
+            padding: 12px;
+            cursor: pointer;
+            position: relative;
+            min-height: auto;
+        }
+
+        .plan:hover {
+            border-color: rgba(110, 231, 255, .35)
+        }
+
+        .plan.active {
+            outline: 2px solid rgba(110, 231, 255, .55);
+            border-color: rgba(110, 231, 255, .55);
+            background: rgba(110, 231, 255, .06);
+        }
+
+        .plan .name {
+            font-weight: 800;
+            letter-spacing: .3px
+        }
+
+        .plan .price {
+            font-family: var(--mono);
+            font-size: 18px;
+            margin-top: 8px;
+        }
+
+        .plan .tag {
+            margin-top: 8px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.35;
+        }
+
+        .plan .plan-features {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--line);
+        }
+
+        .plan .plan-features-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--muted);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .plan .plan-features-list {
+            font-size: 11px;
+            color: var(--muted);
+            line-height: 1.5;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .plan .plan-features-list ul {
+            margin: 0;
+            padding-left: 16px;
+            list-style-type: disc;
+        }
+
+        .plan .plan-features-list li {
+            margin-bottom: 4px;
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, .06);
+            color: var(--muted);
+        }
+
+        .modules {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        @media (max-width: 560px) {
+            .modules {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .module {
+            border: 1px solid var(--line);
+            background: rgba(15, 23, 42, .55);
+            border-radius: var(--radius2);
+            padding: 12px;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .module input {
+            margin-top: 3px;
+            transform: scale(1.1)
+        }
+
+        .module .meta {
+            flex: 1
+        }
+
+        .module .row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .module .title {
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .module .mprice {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--good);
+            white-space: nowrap;
+        }
+
+        .module .desc {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.35;
+            margin-top: 6px;
+        }
+
+        .link {
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--accent);
+            cursor: pointer;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            display: inline-block;
+        }
+
+        .summary {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .kpi {
+            border: 1px solid var(--line);
+            background: rgba(15, 23, 42, .55);
+            border-radius: var(--radius2);
+            padding: 12px;
+        }
+
+        .kpi .label {
+            color: var(--muted);
+            font-size: 12px
+        }
+
+        .kpi .value {
+            font-family: var(--mono);
+            font-size: 22px;
+            margin-top: 6px
+        }
+
+        .kpi .value small {
+            font-size: 12px;
+            color: var(--muted)
+        }
+
+        .line {
+            height: 1px;
+            background: var(--line);
+            margin: 8px 0
+        }
+
+        .list {
+            border: 1px solid var(--line);
+            background: rgba(15, 23, 42, .55);
+            border-radius: var(--radius2);
+            padding: 12px;
+        }
+
+        .list h3 {
+            margin: 0 0 10px 0;
+            font-size: 13px
+        }
+
+        .items {
+            display: flex;
+            flex-direction: column;
+            gap: 8px
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            font-size: 12px;
+            color: var(--muted)
+        }
+
+        .item .amt {
+            font-family: var(--mono);
+            color: var(--text)
+        }
+
+        .empty {
+            color: var(--muted);
+            font-size: 12px
+        }
+
+        .note {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.45;
+            border: 1px dashed rgba(255, 255, 255, .18);
+            padding: 10px 12px;
+            border-radius: var(--radius2);
+            background: rgba(255, 255, 255, .03);
+        }
+
+        /* Modal */
+        dialog {
+            border: none;
+            padding: 0;
+            border-radius: 18px;
+            width: min(720px, 92vw);
+            background: linear-gradient(180deg, rgba(255, 255, 255, .08), rgba(255, 255, 255, .04));
+            color: var(--text);
+            box-shadow: var(--shadow);
+        }
+
+        dialog::backdrop {
+            background: rgba(0, 0, 0, .65);
+            backdrop-filter: blur(3px);
+        }
+
+        .modal-hd {
+            padding: 14px 14px 10px;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .modal-title {
+            font-weight: 800;
+            font-size: 14px;
+            letter-spacing: .2px;
+            margin: 0;
+        }
+
+        .modal-bd {
+            padding: 14px
+        }
+
+        .modal-bd p {
+            margin: 0 0 10px 0;
+            color: var(--muted);
+            font-size: 12.5px;
+            line-height: 1.5
+        }
+
+        .modal-bd ul {
+            margin: 0 0 10px 18px;
+            color: var(--muted);
+            font-size: 12.5px;
+            line-height: 1.5
+        }
+
+        .xbtn {
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, .06);
+            color: var(--text);
+            padding: 7px 10px;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .xbtn:hover {
+            border-color: rgba(110, 231, 255, .45)
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="wrap">
+            <div class="title">
+                <div>
+                    <h1>SiteCare: Plans + Modular Add-ons (Demo)</h1>
+                    <div class="sub">
+                        Select a plan, then add modules. The total updates instantly and shows a clear breakdown.
+                    </div>
+                </div>
+                <div class="toolbar">
+                    <div class="pill" id="selectedPlanPill">Selected: Basic</div>
+                    <button class="btn" id="resetBtn" type="button">Reset selections</button>
+                    <button class="btn" id="copyBtn" type="button">Copy summary</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="wrap grid">
+            <!-- Main content area -->
+            <div class="main-content">
+                <!-- Choose a plan -->
+                <section class="card">
+                    <div class="hd">
+                        <h2>1) Choose a plan</h2>
+                        <div class="muted" style="font-size:12px">Prices are per month</div>
+                    </div>
+                    <div class="bd">
+                        <div class="plans" id="plans"></div>
+                    </div>
+                </section>
+
+                <!-- Add modules -->
+                <section class="card">
+                    <div class="hd">
+                        <h2>2) Add modules</h2>
+                        <div class="muted" style="font-size:12px">Each module shows price and "Read more"</div>
+                    </div>
+                    <div class="bd">
+                        <div class="modules" id="modules"></div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Sidebar - Plan Summary -->
+            <aside class="card sidebar">
+                <div class="hd">
+                    <h2>Plan Summary</h2>
+                    <div class="muted" style="font-size:12px">Plan + modules</div>
+                </div>
+                <div class="bd summary">
+                    <div class="kpi">
+                        <div class="label">Total monthly price</div>
+                        <div class="value" id="totalPrice">$0 <small>/mo</small></div>
+                        <div class="line"></div>
+                        <div class="item">
+                            <div>Base plan</div>
+                            <div class="amt" id="baseLine">$0</div>
+                        </div>
+                        <div class="item">
+                            <div>Modules</div>
+                            <div class="amt" id="modulesLine">$0</div>
+                        </div>
+                    </div>
+
+                    <div class="list">
+                        <h3>Selected items</h3>
+                        <div class="items" id="selectedList"></div>
+                    </div>
+
+                    <button class="btn" id="resetBtnSummary" type="button" style="width:100%;margin-top:12px">Reset
+                        selections</button>
+
+                    <div class="note" id="noteBox">
+                        Tip: This page acts are pricing calculator for SiteCare. Add only what you need. It Can be
+                        converted to PDF
+                        invoice Later.
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <dialog id="modal">
+        <div class="modal-hd">
+            <div>
+                <p class="modal-title" id="modalTitle">Module</p>
+                <div class="muted" id="modalPrice" style="font-family:var(--mono);font-size:12px;margin-top:4px">$0/mo
+                </div>
+            </div>
+            <button class="xbtn" id="closeModal" type="button">Close</button>
+        </div>
+        <div class="modal-bd" id="modalBody"></div>
+    </dialog>
+
+    <script>
+        // --- Data ---
+        const PLANS = [
+            {
+                id: "basic",
+                name: "Basic",
+                price: 99,
+                badge: "Starter",
+                blurb: "Essentials coverage.",
+                features: [
+                    "Offsite Backups - Weekly backups with on-demand restore points",
+                    "Zero Down-Time - Uptime monitoring with proactive restoration",
+                    "Website Health Reports - Monthly performance, security, and speed reports",
+                    "Website Security - Updated protection against malware and hacker attacks",
+                    "Dedicated Server Hosting (Optional) - Transfer to dedicated server if needed"
+                ]
+            },
+            {
+                id: "silver",
+                name: "Silver",
+                price: 249,
+                badge: "Protection",
+                blurb: "More monitoring + performance.",
+                features: [
+                    "All Basic features included",
+                    "Managed Software Updates - Regular WordPress core, theme, and plugin updates",
+                    "Image Optimization - Keep site fast even with lots of images",
+                    "Performance Check - Daily speed monitoring across multiple pages",
+                    "Safe Updates - Backup before updates for safety",
+                    "Broken Links Monitor - Continuous URL error checking",
+                    "Support - 24-hour turnaround time",
+                    "Fast Site Across The Globe - CDN across 40+ regions",
+                    "Speed Optimization - WP-Rocket optimization",
+                    "A-Grade Security Monitoring - Advanced hacker protection",
+                    "Database Optimization - Clean unnecessary records",
+                    "Malware Cleaner - Proven detection and removal system",
+                    "Regularly Notify Google of Changes - Sitemap and URL submission"
+                ]
+            },
+            {
+                id: "gold",
+                name: "Gold",
+                price: 449,
+                badge: "Advanced",
+                blurb: "Optimization + staging + fixes.",
+                features: [
+                    "All Silver features included",
+                    "Offsite Backups - Daily backups (upgraded from weekly)",
+                    "Support - 12-hour turnaround time (upgraded from 24-hour)",
+                    "Bloat Removal - Remove unused CSS, scripts, and plugins from Home, About, Contact pages",
+                    "Premium Plugins - Access to agency premium plugins",
+                    "2-Factor Authentication - Optional secure login setup",
+                    "Staging for Experiments - Create staging sites for testing",
+                    "Fix Problems - 2 clock hours per month for WordPress errors and issues",
+                    "Cloudflare Integration - Free CDN and DNS optimization",
+                    "Next-gen Image Format - WebP conversion for faster loading"
+                ]
+            },
+            {
+                id: "platinum",
+                name: "Platinum",
+                price: 649,
+                badge: "Done-for-you",
+                blurb: "Most inclusive support.",
+                features: [
+                    "All Gold features included",
+                    "Offsite Backups - Hourly backups (upgraded from daily)",
+                    "Support - Skip the queue email support with live chat",
+                    "No Spam Bots - Akismet premium anti-spam protection",
+                    "Site Edits via Email - 2 clock hours per month for content changes",
+                    "Bloat Removal - Extended to main pages and post type pages",
+                    "Monthly Strategy Review Call - Scheduled strategy discussions",
+                    "Unlimited Support Tasks - Fix problems and update content regularly",
+                    "Development & Design Expert - 2 hours expert developer time",
+                    "Complete Website Remake - Available with 36-month upfront subscription (10-15 pages + 3 post types, WooCommerce optional)"
+                ]
+            }
+        ];
+
+        // You can edit module list freely. Keep each module: clear name, monthly price, short and long description.
+        const MODULES = [
+            {
+                id: "hardening",
+                category: "Security",
+                name: "Advanced Security Hardening",
+                price: 129,
+                short: "Lock down WordPress attack surface (headers, login, file rules).",
+                long: `
+          <p>Ideal for sites that want stronger protection without upgrading plans.</p>
+          <ul>
+            <li>WordPress hardening (permissions, wp-config protection, disable risky endpoints)</li>
+            <li>Admin URL protection + login throttling</li>
+            <li>Security headers setup (HSTS, CSP, X-Frame options based on compatibility)</li>
+            <li>Baseline audit + monthly re-check</li>
+          </ul>
+          <p><strong>Boundary:</strong> Does not include custom firewall rule engineering or incident cleanup.</p>
+        `
+            },
+            {
+                id: "malware_rt",
+                category: "Security",
+                name: "Real-Time Malware Protection",
+                price: 179,
+                short: "Continuous file monitoring with fast isolation and cleanup coverage.",
+                long: `
+          <p>Best for businesses that cannot risk downtime or search blacklisting.</p>
+          <ul>
+            <li>Real-time file integrity monitoring</li>
+            <li>Automated suspicious change alerts</li>
+            <li>Priority malware cleanup (includes 1 incident/month)</li>
+            <li>Blacklist monitoring + review after cleanup</li>
+          </ul>
+          <p><strong>Boundary:</strong> Complex reinfections may require additional billable work if root cause is outside WP.</p>
+        `
+            },
+            {
+                id: "waf",
+                category: "Security",
+                name: "WAF + Bot Defense (Cloudflare Rules)",
+                price: 99,
+                short: "Managed firewall rules and bot mitigation tuned for your site.",
+                long: `
+          <p>Helps reduce brute force, spam traffic, and common exploit attempts.</p>
+          <ul>
+            <li>Cloudflare WAF rule set tuning</li>
+            <li>Bot mitigation configuration</li>
+            <li>Rate limiting for login, xmlrpc, and high-risk endpoints</li>
+            <li>Monthly review and adjustments</li>
+          </ul>
+          <p><strong>Requirement:</strong> Cloudflare account access.</p>
+        `
+            },
+            {
+                id: "perf_cwv",
+                category: "Performance",
+                name: "Core Web Vitals Optimization",
+                price: 149,
+                short: "Hands-on optimization for LCP/INP/CLS improvements.",
+                long: `
+          <p>Targeted performance work to improve real user experience and Lighthouse metrics.</p>
+          <ul>
+            <li>Critical CSS and render-blocking reduction</li>
+            <li>Image loading strategy tuning</li>
+            <li>Script deferral and third-party impact reduction</li>
+            <li>Monthly performance report with actions</li>
+          </ul>
+          <p><strong>Boundary:</strong> Covers up to 10 key pages (additional pages can be added).</p>
+        `
+            },
+            {
+                id: "seo_monitor",
+                category: "SEO",
+                name: "Technical SEO Monitoring",
+                price: 99,
+                short: "Indexing, crawl errors, sitemaps, and schema checks with alerts.",
+                long: `
+          <p>Designed to catch technical issues that silently hurt rankings.</p>
+          <ul>
+            <li>Search Console monitoring (coverage, indexing, manual actions)</li>
+            <li>Sitemap validation and URL submission support</li>
+            <li>Crawl error monitoring</li>
+            <li>Structured data (schema) validation checks</li>
+          </ul>
+          <p><strong>Boundary:</strong> Not a content writing or backlink service.</p>
+        `
+            },
+            {
+                id: "wc_care",
+                category: "Ecommerce",
+                name: "WooCommerce Care",
+                price: 249,
+                short: "Checkout monitoring, payment issues, order performance tuning.",
+                long: `
+          <p>For stores where revenue depends on a stable checkout and fast product pages.</p>
+          <ul>
+            <li>Checkout flow monitoring and quick fixes</li>
+            <li>Payment gateway health checks</li>
+            <li>Cart/checkout performance tuning</li>
+            <li>Order database housekeeping guidance</li>
+          </ul>
+          <p><strong>Boundary:</strong> Custom feature development is separate from care.</p>
+        `
+            },
+            {
+                id: "dev_2h",
+                category: "Development",
+                name: "Developer Time Pack (2 hours/month)",
+                price: 199,
+                short: "Use for small fixes, layout tweaks, plugin config, and tasks.",
+                long: `
+          <p>Flexible support time you can allocate to changes each month.</p>
+          <ul>
+            <li>2 hours/month developer time</li>
+            <li>Small fixes, content/layout adjustments, plugin setup</li>
+            <li>Monthly summary of work completed</li>
+          </ul>
+          <p><strong>Boundary:</strong> Hours expire monthly; larger projects quoted separately.</p>
+        `
+            },
+            {
+                id: "uptime_plus",
+                category: "Monitoring",
+                name: "Uptime + Incident Response Plus",
+                price: 79,
+                short: "More frequent checks and priority incident handling.",
+                long: `
+          <p>For sites that need faster detection and response.</p>
+          <ul>
+            <li>1-minute uptime checks (vs standard intervals)</li>
+            <li>Priority incident response workflow</li>
+            <li>Optional SMS/Slack alert routing (if available)</li>
+          </ul>
+          <p><strong>Boundary:</strong> Does not include development changes outside incident resolution.</p>
+        `
+            }
+        ];
+
+        // --- State ---
+        let state = {
+            selectedPlanId: "basic",
+            selectedModules: new Set()
+        };
+
+        // --- Helpers ---
+        const $ = (sel) => document.querySelector(sel);
+        const fmt = (n) => "$" + Number(n).toFixed(0);
+
+        function getSelectedPlan() {
+            return PLANS.find(p => p.id === state.selectedPlanId) || PLANS[0];
+        }
+
+        function getSelectedModules() {
+            return MODULES.filter(m => state.selectedModules.has(m.id));
+        }
+
+        function calcTotals() {
+            const plan = getSelectedPlan();
+            const mods = getSelectedModules();
+            const modulesTotal = mods.reduce((sum, m) => sum + m.price, 0);
+            const total = plan.price + modulesTotal;
+            return { plan, mods, modulesTotal, total };
+        }
+
+        // --- Renderers ---
+        function renderPlans() {
+            const el = $("#plans");
+            el.innerHTML = "";
+
+            PLANS.forEach(p => {
+                const div = document.createElement("div");
+                div.className = "plan" + (p.id === state.selectedPlanId ? " active" : "");
+                div.setAttribute("role", "button");
+                div.setAttribute("tabindex", "0");
+                div.dataset.planId = p.id;
+
+                // Build features list HTML
+                let featuresHtml = `<div class="plan-features">
+          <div class="plan-features-title">Features</div>
+          <div class="plan-features-list">
+            <ul>`;
+                p.features.forEach(feature => {
+                    featuresHtml += `<li>${feature}</li>`;
+                });
+                featuresHtml += `</ul></div></div>`;
+
+                div.innerHTML = `
+          <div class="badge">${p.badge}</div>
+          <div class="name">${p.name}</div>
+          <div class="price">${fmt(p.price)}<span class="muted">/mo</span></div>
+          <div class="tag">${p.blurb}</div>
+          ${featuresHtml}
+        `;
+
+                div.addEventListener("click", () => {
+                    state.selectedPlanId = p.id;
+                    $("#selectedPlanPill").textContent = "Selected: " + p.name;
+                    renderAll();
+                });
+                div.addEventListener("keydown", (e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                        e.preventDefault();
+                        div.click();
+                    }
+                });
+
+                el.appendChild(div);
+            });
+        }
+
+        function renderModules() {
+            const el = $("#modules");
+            el.innerHTML = "";
+
+            // Optional: group by category for readability
+            const grouped = MODULES.reduce((acc, m) => {
+                acc[m.category] = acc[m.category] || [];
+                acc[m.category].push(m);
+                return acc;
+            }, {});
+
+            // Keep consistent order by category appearance in MODULES
+            const categoryOrder = [];
+            MODULES.forEach(m => { if (!categoryOrder.includes(m.category)) categoryOrder.push(m.category); });
+
+            categoryOrder.forEach(cat => {
+                const catHeader = document.createElement("div");
+                catHeader.style.gridColumn = "1 / -1";
+                catHeader.style.margin = "6px 0 0";
+                catHeader.innerHTML = `
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px">
+            <div style="font-weight:800;font-size:13px;letter-spacing:.2px">${cat}</div>
+            <div class="muted" style="font-size:12px">Pick any modules</div>
+          </div>
+          <div style="height:1px;background:var(--line);margin:10px 0 10px"></div>
+        `;
+                el.appendChild(catHeader);
+
+                grouped[cat].forEach(m => {
+                    const wrap = document.createElement("div");
+                    wrap.className = "module";
+
+                    const checked = state.selectedModules.has(m.id);
+                    wrap.innerHTML = `
+            <input type="checkbox" id="mod_${m.id}" ${checked ? "checked" : ""} />
+            <div class="meta">
+              <div class="row">
+                <div class="title">${m.name}</div>
+                <div class="mprice">+${fmt(m.price)}/mo</div>
+              </div>
+              <div class="desc">${m.short}</div>
+              <span class="link" data-more="${m.id}">Read more</span>
+            </div>
+          `;
+
+                    const cb = wrap.querySelector("input");
+                    cb.addEventListener("change", () => {
+                        if (cb.checked) state.selectedModules.add(m.id);
+                        else state.selectedModules.delete(m.id);
+                        renderSummary();
+                    });
+
+                    wrap.querySelector(".link").addEventListener("click", () => openModal(m.id));
+                    el.appendChild(wrap);
+                });
+            });
+        }
+
+        function renderSummary() {
+            const { plan, mods, modulesTotal, total } = calcTotals();
+
+            $("#totalPrice").innerHTML = `${fmt(total)} <small>/mo</small>`;
+            $("#baseLine").textContent = fmt(plan.price);
+            $("#modulesLine").textContent = fmt(modulesTotal);
+
+            const list = $("#selectedList");
+            list.innerHTML = "";
+
+            // Plan line
+            const planLine = document.createElement("div");
+            planLine.className = "item";
+            planLine.innerHTML = `<div><strong>${plan.name}</strong> plan</div><div class="amt">${fmt(plan.price)}</div>`;
+            list.appendChild(planLine);
+
+            if (mods.length) {
+                mods.forEach(m => {
+                    const it = document.createElement("div");
+                    it.className = "item";
+                    it.innerHTML = `<div>${m.name}</div><div class="amt">+${fmt(m.price)}</div>`;
+                    list.appendChild(it);
+                });
+            } else {
+                const empty = document.createElement("div");
+                empty.className = "empty";
+                empty.textContent = "No modules added yet.";
+                list.appendChild(empty);
+            }
+        }
+
+        function renderAll() {
+            renderPlans();
+            renderModules();
+            renderSummary();
+        }
+
+        // --- Modal ---
+        function openModal(moduleId) {
+            const m = MODULES.find(x => x.id === moduleId);
+            if (!m) return;
+            $("#modalTitle").textContent = m.name;
+            $("#modalPrice").textContent = `${fmt(m.price)}/mo`;
+            $("#modalBody").innerHTML = m.long;
+            $("#modal").showModal();
+        }
+
+        function openPlanModal(planId) {
+            const p = PLANS.find(x => x.id === planId);
+            if (!p) return;
+            $("#modalTitle").textContent = `${p.name} Plan`;
+            $("#modalPrice").textContent = `${fmt(p.price)}/mo`;
+
+            let featuresHtml = `<p><strong>${p.blurb}</strong></p>`;
+            featuresHtml += `<ul>`;
+            p.features.forEach(feature => {
+                featuresHtml += `<li>${feature}</li>`;
+            });
+            featuresHtml += `</ul>`;
+
+            $("#modalBody").innerHTML = featuresHtml;
+            $("#modal").showModal();
+        }
+        $("#closeModal").addEventListener("click", () => $("#modal").close());
+        $("#modal").addEventListener("click", (e) => {
+            // click outside content closes dialog
+            const rect = $("#modal").getBoundingClientRect();
+            const isInDialog = (
+                e.clientX >= rect.left && e.clientX <= rect.right &&
+                e.clientY >= rect.top && e.clientY <= rect.bottom
+            );
+            if (!isInDialog) $("#modal").close();
+        });
+
+        // --- Actions ---
+        function resetSelections() {
+            state.selectedPlanId = "basic";
+            state.selectedModules = new Set();
+            $("#selectedPlanPill").textContent = "Selected: Basic";
+            renderAll();
+        }
+
+        $("#resetBtn").addEventListener("click", resetSelections);
+        $("#resetBtnSummary").addEventListener("click", resetSelections);
+
+        $("#copyBtn").addEventListener("click", async () => {
+            const { plan, mods, modulesTotal, total } = calcTotals();
+            const lines = [];
+            lines.push(`SiteCare quote (monthly)`);
+            lines.push(`Plan: ${plan.name} - ${fmt(plan.price)}/mo`);
+            if (mods.length) {
+                lines.push(`Modules:`);
+                mods.forEach(m => lines.push(`- ${m.name}: +${fmt(m.price)}/mo`));
+            } else {
+                lines.push(`Modules: none`);
+            }
+            lines.push(`Modules total: ${fmt(modulesTotal)}/mo`);
+            lines.push(`Grand total: ${fmt(total)}/mo`);
+            const text = lines.join("\n");
+
+            try {
+                await navigator.clipboard.writeText(text);
+                $("#noteBox").textContent = "Copied summary to clipboard.";
+                setTimeout(() => {
+                    $("#noteBox").textContent = "Tip: Use this demo in meetings to show \"stay on any plan + add only what you need\". You can later connect this to a quote form or PDF generator.";
+                }, 1800);
+            } catch (err) {
+                // Fallback
+                window.prompt("Copy this summary:", text);
+            }
+        });
+
+        // --- Init ---
+        renderAll();
+    </script>
+</body>
+
+</html>
